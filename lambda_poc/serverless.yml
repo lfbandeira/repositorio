@@ -1,0 +1,28 @@
+service: lambda-poc
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${opt:stage,'dev'}
+  region: ${opt:region, 'sa-east-1'}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:PutItem
+        - dynamodb:DeleteItem
+        - dynamodb:GetItem
+      Resource: arn:aws:dynamodb:sa-east-1:525067616189:table/EMBALAGEM
+      
+
+  memorySize: 128
+  timeout: 3 
+functions:
+  consultarEmbalagens:
+    handler: handler.consultarEmbalagens
+    events:
+      - httpApi:
+         path: /consultarEmbalagens
+         method: post
