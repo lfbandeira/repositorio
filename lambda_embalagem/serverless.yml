@@ -1,0 +1,78 @@
+service: lambda-embalagem
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${opt:stage,'dev'}
+  region: ${opt:region, 'sa-east-1'}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:PutItem
+        - dynamodb:DeleteItem
+        - dynamodb:GetItem
+      Resource: arn:aws:dynamodb:sa-east-1:525067616189:table/EMBALAGEM
+      
+
+  memorySize: 128
+  timeout: 3  
+functions:
+  listarCombo:
+    handler: handler.listarCombo
+    events:
+      - httpApi:
+         path: /listarCombo/{cpf_cnpj}
+         method: get
+  listarTodas:
+    handler: handler.listarTodas
+    events:
+      - httpApi:
+         path: /lista/{cpf_cnpj}
+         method: get
+  consultaPaginada:
+    handler: handler.consultaPaginada
+    events:
+      - httpApi:
+         path: /consultaPaginada
+         method: post
+  cadastrarEmbalagem:
+    handler: handler.cadastrarEmbalagem
+    events:
+      - httpApi:
+         path: /cadastrarEmbalagem
+         method: post
+  listaPorId:
+    handler: handler.listaPorId
+    events:
+      - httpApi:
+         path: /listaporid/{cpf_cnpj}/{idEmbalagem}
+         method: get
+  buscaContagem:
+    handler: handler.buscaContagem
+    events:
+      - httpApi:
+         path: /buscaContagem/{cpf_cnpj}
+         method: get  
+resources:
+  Resources:
+    ListaTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: EMBALAGEM
+        AttributeDefinitions:
+          - AttributeName: idEmbalagem
+            AttributeType: S
+          - AttributeName: cpf_cnpj
+            AttributeType: S
+        KeySchema:
+          - AttributeName: cpf_cnpj
+            KeyType: HASH
+          - AttributeName: idEmbalagem
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
