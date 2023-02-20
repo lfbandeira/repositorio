@@ -1,0 +1,33 @@
+<div style="text-align: center; font-size: medium; padding-top: 15px;">
+  Usuário :  {{usuario}}
+</div>
+
+<mat-card>
+  <mat-toolbar> Lista de Usuários </mat-toolbar>
+  <div class="column-flex mat-elevation-z8">
+  <app-usuario-list *ngIf="usuarios as usuarios; else loading"
+  [usuarios]="usuarios"
+  (add)="onAdd()"
+  (edit)="onEdit($event)"
+  (list)="onList($event)"></app-usuario-list>
+  <ng-template #loading>
+  <mat-spinner></mat-spinner>
+  </ng-template>
+  </div>
+</mat-card>
+
+<mat-card-actions>
+  <table align="center" style="border-top: blue; border-top-right-radius: 10px;">
+    <tr>
+      <td>
+        <button mat-raised-button color="primary" (click)="onListPaginado()">Próxima Página</button>
+      </td>
+
+      <td>
+        <button mat-raised-button color="primary" (click)="limpaFiltro()">Limpa filtro</button>
+      </td>
+    </tr>
+  </table>
+
+</mat-card-actions>
+

@@ -1,0 +1,156 @@
+<form [formGroup]="form">
+  <mat-card>
+    <mat-toolbar> Transferência de Estoque </mat-toolbar>
+    <table>
+      <tr>
+        <td>
+          <div style="padding-bottom: 5px;">
+
+            <button mat-mini-fab color="accent" (click)="onListProduto()" [disabled]="form.get('idProduto').hasError('required')"  *ngIf="desabilitaSpinnerProd; else loading">
+              <mat-icon>search</mat-icon>
+            </button>
+          </div>
+          <div style="padding-bottom: 10px;">
+            <input style="font-size: 20px; height: auto; width: 150px;" type="number"   formControlName="idProduto">
+          </div>
+          <div>
+            <label>Código do Produto</label>
+          </div>
+        </td>
+
+    </table>
+
+    <mat-card-content style="align-items: center;">
+      <p></p>
+
+      <mat-form-field class="full-width">
+        <input matInput readonly placeholder="Produto" formControlName="descProduto">
+        <small *ngIf="form.get('descProduto').hasError('required')" class="validation-error">
+          Produto Obrigatório
+        </small>
+      </mat-form-field>
+
+
+      <!-- **********    Div Quantidade   ********-->
+      <div style="text-align: center;">
+
+        <table align="center">
+          <tr>
+            <td>
+              <div>
+                <input style="font-size: 20px; height: auto; width: 150px;" type="number" formControlName="quantidade">
+              </div>
+              <div>
+                <label>Quantidade</label>
+              </div>
+            </td>
+
+
+          </tr>
+
+          <tr>
+            <td>
+              <div>
+                <small *ngIf="form.get('quantidade').hasError('required')" class="validation-error">
+                  Quantidade Obrigatória
+                </small>
+              </div>
+            </td>
+
+          </tr>
+        </table>
+      </div>
+
+      <!-- ********* Div busca Unidade Origem  **********-->
+      <div style="text-align: center;">
+
+        <table align="center">
+          <tr>
+            <td>
+              <div style="padding-bottom: 5px;">
+
+                <button mat-mini-fab color="accent" [disabled]="form.get('idUnidadeOrigem').hasError('required')"  (click)="onListUnidade('unidadeOrigem')"
+                  *ngIf="desabilitaSpinnerUnOrigem; else loading">
+                  <mat-icon>search</mat-icon>
+                </button>
+              </div>
+              <div>
+                <input style="font-size: 20px; height: auto; width: 150px;" formControlName="idUnidadeOrigem"
+                  type="number">
+              </div>
+              <div>
+                <label>Unidade Origem</label>
+              </div>
+            </td>
+
+
+          </tr>
+        </table>
+      </div>
+
+
+      <mat-form-field class="full-width">
+        <input matInput readonly placeholder="Unidade Origem" formControlName="unidadeOrigem">
+        <small *ngIf="form.get('unidadeOrigem').hasError('required')" class="validation-error">
+          Origem Obrigatória
+        </small>
+      </mat-form-field>
+
+
+
+      <!-- ********** Div Busca Unidade Destino  *******-->
+
+      <div style="text-align: center;">
+
+        <table align="center">
+          <tr>
+            <td>
+              <div style="padding-bottom: 5px;">
+
+                <button mat-mini-fab color="accent" [disabled]="form.get('idUnidadeDestino').hasError('required')"  (click)="onListUnidade('unidadeDestino')"
+                  *ngIf="desabilitaSpinnerUnDestino; else loading">
+                  <mat-icon>search</mat-icon>
+                </button>
+              </div>
+              <div>
+                <input style="font-size: 20px; height: auto; width: 150px;" type="number"
+                  formControlName="idUnidadeDestino">
+              </div>
+              <div>
+                <label>Unidade Destino</label>
+              </div>
+            </td>
+
+
+          </tr>
+        </table>
+      </div>
+
+
+      <mat-form-field class="full-width">
+        <input matInput readonly placeholder="Unidade Destino" formControlName="unidadeDestino">
+        <small *ngIf="form.get('unidadeDestino').hasError('required')" class="validation-error">
+          Destino Obrigatório
+        </small>
+      </mat-form-field>
+
+
+
+
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="salvarTransferencia()"
+        *ngIf="desabilitaSpinnerSalvar; else loading">Enviar</button>
+
+    </mat-card-actions>
+
+    <div class="column-flex mat-elevation-z8">
+      <ng-template #loading>
+        <mat-spinner></mat-spinner>
+      </ng-template>
+    </div>
+
+
+  </mat-card>
+</form>

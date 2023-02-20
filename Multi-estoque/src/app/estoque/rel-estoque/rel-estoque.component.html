@@ -1,0 +1,76 @@
+<form [formGroup]="form" class="min-width">
+  <mat-card style="align-items: center;">
+    <mat-card-header>
+      <mat-card-title>
+        Consulta Estoque de Produtos
+      </mat-card-title>
+
+    </mat-card-header>
+
+
+
+    <table align="center">
+      <tr>
+        <td>
+          <div style="padding-bottom: 5px;">
+
+            <button mat-mini-fab color="accent" [disabled]="form.get('idProduto').hasError('required')"  (click)="consultaProduto()" *ngIf="desabilitaSpinner; else loading">
+              <mat-icon>search</mat-icon>
+            </button>
+          </div>
+          <div style="padding-bottom: 10px;">
+            <input style="font-size: 20px; height: auto; width: 150px;" type="number" formControlName="idProduto">
+          </div>
+          <div>
+            <label>Código do Produto</label>
+          </div>
+        </td>
+
+      </tr>
+
+    </table>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" [disabled]="form.get('descProduto').hasError('required')" (click)="onList()">Consultar Estoque</button>
+    </mat-card-actions>
+    <mat-card-content>
+
+      <mat-form-field class="full-width">
+        <input matInput readonly placeholder="Produto" formControlName="descProduto">
+      </mat-form-field>
+
+      <p></p>
+      <mat-table [dataSource]="rel">
+
+        <ng-container matColumnDef="descProduto">
+          <mat-header-cell *matHeaderCellDef> Produto </mat-header-cell>
+          <mat-cell *matCellDef="let rel"> {{ rel.descProduto }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="descUnidade">
+          <mat-header-cell *matHeaderCellDef> Unidade </mat-header-cell>
+          <mat-cell *matCellDef="let rel"> {{ rel.descUnidade }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="descEmbalagem">
+          <mat-header-cell *matHeaderCellDef> Embalagem </mat-header-cell>
+          <mat-cell *matCellDef="let rel"> {{ rel.descEmbalagem }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="totalEmEstoque">
+          <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
+          <mat-cell *matCellDef="let rel"> {{ rel.totalEmEstoque }} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+    </mat-card-content>
+
+
+    <div class="column-flex mat-elevation-z8">
+      <ng-template #loading>
+        <mat-spinner></mat-spinner>
+      </ng-template>
+    </div>
+
+  </mat-card>
+</form>

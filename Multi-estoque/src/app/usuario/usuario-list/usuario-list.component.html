@@ -1,0 +1,47 @@
+<div style="padding-bottom: 5px;">
+
+  <button mat-mini-fab color="accent" (click)="onList()" >
+     <mat-icon>search</mat-icon>
+   </button>
+ </div>
+
+ <div  style="padding-bottom: 30px;">
+   <input style="font-size: 20px; height: auto;" type="text"
+    [(ngModel)]="parametroConsulta"
+    >
+ </div>
+<mat-table [dataSource]="usuarios">
+  <!--
+  <ng-container matColumnDef="cpf_cnpj">
+    <mat-header-cell *matHeaderCellDef> Cpf/cnpj </mat-header-cell>
+    <mat-cell *matCellDef="let usuario"> {{ usuario.cpf_cnpj }} </mat-cell>
+  </ng-container>
+-->
+  <ng-container matColumnDef="login">
+    <mat-header-cell *matHeaderCellDef> Login </mat-header-cell>
+    <mat-cell *matCellDef="let usuario"> {{ usuario.login }} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="nome">
+    <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+    <mat-cell *matCellDef="let usuario"> {{ usuario.nome }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="acoes">
+    <mat-header-cell *matHeaderCellDef class="action-column">
+      <button mat-mini-fab color="accent" (click)="onAdd()" >
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-header-cell>
+
+
+    <mat-cell *matCellDef="let central" class="action-column">
+      <button mat-icon-button color="primary" (click)="onEdit(central)">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+

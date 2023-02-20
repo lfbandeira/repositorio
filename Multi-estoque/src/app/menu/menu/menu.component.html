@@ -1,0 +1,125 @@
+<mat-drawer #drawer class="side-nav" mode="side">
+  <div class="container-nav">
+    <mat-accordion multi="false">
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title class="panel-title">
+            Cadastrar
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="button-nav">
+          <button mat-button (click)="goForm('embalagem');accordion.closeAll();drawer.toggle()">
+            <fa-icon [icon]="faGift"></fa-icon>
+            Embalagem
+          </button>
+
+          <button mat-button (click)="goForm('produto');accordion.closeAll();drawer.toggle()">
+            <fa-icon [icon]="faTruckFast"></fa-icon>
+            Produtos
+          </button>
+
+          <button mat-button (click)="goForm('unidade');accordion.closeAll();drawer.toggle()">
+            <fa-icon [icon]="faHouse"></fa-icon>
+            Unidade
+          </button>
+
+          <button mat-button (click)="goForm('usuario');accordion.closeAll();drawer.toggle()">
+            <fa-icon [icon]="faUser"></fa-icon>
+            Usuário
+          </button>
+
+          <button mat-button (click)="goForm('estoque');accordion.closeAll();drawer.toggle()">
+            <fa-icon [icon]="faClipboard"></fa-icon>
+            Estoque
+          </button>
+        </div>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title class="panel-title">
+            Consultar
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="button-nav">
+
+          <button mat-button (click)="goForm('relEstoque') ;accordion.closeAll();drawer.toggle()">
+            <fa-icon [icon]="faList"></fa-icon>
+            Relatório de Estoque
+          </button>
+        </div>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</mat-drawer>
+
+<mat-toolbar *ngIf="mostrarMenu" color="primary" style="height: 100px;">
+
+  <div class="container">
+    <div style="vertical-align:middle;">
+     <table>
+      <tr>
+        <td>
+          <img src="../../../assets/logo_.png" height="70px" width="70px">
+        </td>
+        <td>
+          Multi-Estoque
+        </td>
+
+      </tr>
+     </table>
+
+    </div>
+    <div class="drop-menu hidden-div">
+
+      <button class="button-text" mat-button [matMenuTriggerFor]="menuForm">Cadastrar</button>
+      <mat-menu #menuForm="matMenu">
+        <button mat-menu-item (click)="goForm('embalagem')">
+          <fa-icon [icon]="faGift"></fa-icon>
+          Embalagem
+        </button>
+        <button mat-menu-item (click)="goForm('produto')">
+          <fa-icon [icon]="faTruckFast"></fa-icon>
+          Produtos
+        </button>
+        <button mat-menu-item (click)="goForm('unidade')">
+          <fa-icon [icon]="faHouse"></fa-icon>
+          Unidade
+        </button>
+        <button mat-menu-item (click)="goForm('usuario')">
+          <fa-icon [icon]="faUser"></fa-icon>
+          Usuário
+        </button>
+        <button mat-menu-item (click)="goForm('estoque')">
+          <fa-icon [icon]="faClipboard"></fa-icon>
+          Estoque
+        </button>
+
+      </mat-menu>
+
+      <button class="button-text" mat-button [matMenuTriggerFor]="menuConsulta">Consultar</button>
+      <mat-menu #menuConsulta="matMenu">
+        <button mat-menu-item (click)="goForm('relEstoque')">
+          <fa-icon [icon]="faList"></fa-icon>
+          Relatório de Estoque
+        </button>
+      </mat-menu>
+    </div>
+    <div class="hidden-div">
+      <button mat-icon-button (click)="drawer.toggle();accordion.closeAll()">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
+    <div class="icon-menu">
+      <button mat-icon-button (click)="drawer.toggle();accordion.closeAll()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+  </div>
+
+</mat-toolbar>
+<router-outlet></router-outlet>
+

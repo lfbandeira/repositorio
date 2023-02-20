@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title> Cadastrando Usuário </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+
+    <form [formGroup]="form" class="min-width">
+
+      <mat-form-field class="full-width">
+        <input matInput [readonly]="editando" placeholder="Login" formControlName="login">
+        <small *ngIf="form.get('login').hasError('required')" class="validation-error">
+          Login obrigatório
+        </small>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Nome" formControlName="nome">
+        <small *ngIf="form.get('nome').hasError('required')" class="validation-error">
+          Nome obrigatório
+        </small>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input type="password" matInput placeholder="Senha" formControlName="senha">
+        <small *ngIf="form.get('senha').hasError('required')" class="validation-error">
+          Senha obrigatória
+        </small>
+      </mat-form-field>
+
+
+
+    </form>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="onSubmit()">Enviar</button>
+    <button mat-raised-button (click)="onCancel()">Cancelar</button>
+  </mat-card-actions>
+
+</mat-card>

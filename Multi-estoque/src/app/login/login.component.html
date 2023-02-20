@@ -1,0 +1,55 @@
+<mat-card style="align-items: center;">
+  <mat-card-header>
+    <mat-card-title>
+      Login
+    </mat-card-title>
+  </mat-card-header>
+
+
+  <mat-card-content>
+    <p></p>
+    <form [formGroup]="form">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Chave da Empresa" formControlName="cpf_cnpj">
+        <small
+        *ngIf="form.get('cpf_cnpj').hasError('required')"
+        class="validation-error">
+          Chave Obrigatoria
+
+        </small>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Usuario" formControlName="login">
+        <small
+        *ngIf="form.get('login').hasError('required')"
+        class="validation-error">
+          Login obrigatório
+
+        </small>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input type="password" matInput placeholder="Senha" formControlName="senha">
+        <small
+        *ngIf="form.get('senha').hasError('required')"
+        class="validation-error">
+          Senha obrigatória
+
+        </small>
+      </mat-form-field>
+
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="fazerLogin()"
+    *ngIf="spinner; else loading">Enviar</button>
+    <button mat-raised-button (click)="cancelar()" >Cancelar</button>
+  </mat-card-actions>
+  <div class="column-flex mat-elevation-z8">
+    <ng-template #loading>
+      <mat-spinner></mat-spinner>
+    </ng-template>
+  </div>
+
+</mat-card>

@@ -1,0 +1,91 @@
+<form [formGroup]="form">
+  <mat-card>
+    <mat-toolbar> Venda </mat-toolbar>
+
+
+    <table>
+      <tr>
+        <td>
+          <div style="padding-bottom: 5px;">
+
+            <button mat-mini-fab color="accent"  [disabled]="form.get('idProduto').hasError('required')" (click)="onListProduto()" *ngIf="desabilitaSpinnerProd; else loading">
+              <mat-icon>search</mat-icon>
+            </button>
+          </div>
+          <div style="padding-bottom: 10px;">
+            <input style="font-size: 20px; height: auto; width: 150px;" type="number"  formControlName="idProduto">
+          </div>
+          <div>
+            <label>Código do Produto</label>
+          </div>
+        </td>
+        <td>
+          <div style="padding-bottom: 5px;">
+
+            <button mat-mini-fab color="accent"  [disabled]="form.get('idUnidade').hasError('required')" (click)="onListUnidade()"
+              *ngIf="desabilitaSpinnerUnid; else loading">
+              <mat-icon>search</mat-icon>
+            </button>
+          </div>
+          <div style="padding-bottom: 10px;">
+            <input style="font-size: 20px; height: auto; width: 150px;" type="number"  formControlName="idUnidade">
+          </div>
+          <div>
+            <label>Código da Unidade</label>
+          </div>
+        </td>
+      </tr>
+
+    </table>
+    <table>
+      <tr>
+        <td>
+          <div>
+            <input style="font-size: 20px; height: auto; width: 150px;" type="number"  formControlName="quantidade">
+
+          </div>
+          <div>
+            <label>Quantidade</label>
+          </div>
+        </td>
+
+      </tr>
+    </table>
+
+
+    <mat-card-content>
+      <p></p>
+
+        <mat-form-field class="full-width">
+          <input matInput readonly placeholder="Unidade"  formControlName="unidade">
+          <small *ngIf="form.get('unidade').hasError('required')" class="validation-error">
+            Unidade é Obrigatória
+          </small>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput readonly placeholder="Produto"  formControlName="descProduto">
+          <small *ngIf="form.get('descProduto').hasError('required')" class="validation-error">
+            Produto é Obrigatório
+          </small>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput readonly placeholder="Embalagem" value="{{descEmbalagem}}">
+
+        </mat-form-field>
+
+
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" [disabled]="form.invalid"  (click)="vender()"
+        *ngIf="desabilitaSpinnerSalvar; else loading">Enviar</button>
+
+    </mat-card-actions>
+
+    <div class="column-flex mat-elevation-z8">
+      <ng-template #loading>
+        <mat-spinner></mat-spinner>
+      </ng-template>
+    </div>
+  </mat-card>
+</form>

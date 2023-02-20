@@ -1,0 +1,17 @@
+<mat-form-field appearance="fill">
+  <mat-label>Operação</mat-label>
+  <mat-select>
+    <mat-option (click)="marcaOpcao('aporte')">Aporte</mat-option>
+    <mat-option (click)="marcaOpcao('venda')">Venda</mat-option>
+    <mat-option (click)="marcaOpcao('transferencia')">Transferência</mat-option>
+    <mat-option (click)="marcaOpcao('avaria')">Avaria</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<app-form-transferencia *ngIf="habilitaTransferencia"></app-form-transferencia>
+
+<app-form-venda *ngIf="habilitaVenda"></app-form-venda>
+
+<app-form-avaria *ngIf="habilitaAvaria"></app-form-avaria>
+
+<app-form-aporte *ngIf="habilitaAporte"></app-form-aporte>

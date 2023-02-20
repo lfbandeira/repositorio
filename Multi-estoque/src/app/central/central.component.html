@@ -1,0 +1,16 @@
+<div style="text-align: center; font-size: medium; padding-top: 15px;">
+  Usuário :  {{usuario}}
+</div>
+
+<mat-card>
+  <mat-toolbar> Lista de Centrais </mat-toolbar>
+  <div class="column-flex mat-elevation-z8">
+  <app-central-list *ngIf="centrais$ | async as centrais; else loading"
+  [centrais]="centrais"
+  (add)="onAdd()"
+  (edit)="onEdit($event)"></app-central-list>
+  <ng-template #loading>
+  <mat-spinner></mat-spinner>
+  </ng-template>
+  </div>
+</mat-card>

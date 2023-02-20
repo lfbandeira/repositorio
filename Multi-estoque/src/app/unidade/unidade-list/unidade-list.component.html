@@ -1,0 +1,51 @@
+<div style="padding-bottom: 5px;">
+
+  <button mat-mini-fab color="accent" (click)="onList()" >
+     <mat-icon>search</mat-icon>
+   </button>
+ </div>
+
+ <div  style="padding-bottom: 30px;">
+   <input style="font-size: 20px; height: auto;" type="number"
+    [(ngModel)]="parametroConsulta"
+    >
+ </div>
+
+<mat-table [dataSource]="unidades">
+  <ng-container matColumnDef="idUnidade">
+    <mat-header-cell *matHeaderCellDef> Código </mat-header-cell>
+    <mat-cell *matCellDef="let unidade"> {{ unidade.idUnidade }} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="descricao">
+    <mat-header-cell *matHeaderCellDef> Descrição </mat-header-cell>
+    <mat-cell *matCellDef="let unidade"> {{ unidade.descricao }} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="cidade">
+    <mat-header-cell *matHeaderCellDef> Cidade </mat-header-cell>
+    <mat-cell *matCellDef="let unidade"> {{ unidade.cidade }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="bairro">
+    <mat-header-cell *matHeaderCellDef> Bairro </mat-header-cell>
+    <mat-cell *matCellDef="let unidade"> {{ unidade.bairro }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="acoes">
+    <mat-header-cell *matHeaderCellDef class="action-column">
+      <button mat-mini-fab color="accent" (click)="onAdd()" >
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-header-cell>
+
+
+    <mat-cell *matCellDef="let central" class="action-column">
+      <button mat-icon-button color="primary" (click)="onEdit(central)">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
