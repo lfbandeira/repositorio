@@ -1,0 +1,7 @@
+{
+    "globals": {
+        "fs": true,
+        "axios": true,
+        "objetos": true
+    }
+}
